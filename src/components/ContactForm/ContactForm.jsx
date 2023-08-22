@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { nanoid } from 'nanoid';
+import { useDispatch } from 'react-redux';
+import { addContact } from 'store/contactSlice';
 import css from './ContactForm.module.css';
 
-const ContactForm = ({ addContact }) => {
+const ContactForm = () => {
+  const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
@@ -18,12 +20,11 @@ const ContactForm = ({ addContact }) => {
     event.preventDefault();
 
     const newContact = {
-      id: nanoid(),
       name,
       number,
     };
 
-    addContact(newContact);
+    dispatch(addContact(newContact));
     setName('');
     setNumber('');
   };
